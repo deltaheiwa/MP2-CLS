@@ -50,7 +50,7 @@ class LogisticRegression(ClassifierMixin, BaseEstimator):
         check_is_fitted(self, 'is_fitted_')
 
         x = validate_data(self, x, reset=False)
-        z = np.dot(x, self._weights.T) + self._bias
+        z = np.dot(x, self._weights) + self._bias
         y_pred = sigmoid(z)
 
         return np.vstack((1 - y_pred, y_pred)).T

@@ -45,8 +45,8 @@ def plot_decision_boundaries(models_dict, x, y):
         Z = model.predict(grid_points)
         Z = Z.reshape(xx.shape)
 
-        ax.contourf(xx, yy, Z, alpha=0.3, cmap=plt.cm.RdYlBu)
-        ax.scatter(x[:, 0], x[:, 1], c=y, s=10, edgecolor='k', cmap=plt.cm.RdYlBu, alpha=0.6)
+        ax.contourf(xx, yy, Z, alpha=0.3)
+        ax.scatter(x[:, 0], x[:, 1], c=y, s=10, edgecolor='k', alpha=0.6)
 
         acc = accuracy_score(y, model.predict(x))
 
@@ -92,6 +92,12 @@ print(f"Training voting classifier...")
 ensemble.fit(x_train, y_train)
 models['vc'] = ensemble
 print("Completed")
+
+print("\n--- Accuracy Results on Training Set ---")
+for name, model in models.items():
+    y_pred = model.predict(x_train)
+    accuracy = accuracy_score(y_train, y_pred)
+    print(f"{name} {accuracy:.4f}")
 
 print("\n--- Accuracy Results on Test Set ---")
 for name, model in models.items():
